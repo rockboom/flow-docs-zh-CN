@@ -15,7 +15,7 @@ Flow是一个JavaScript的静态类型检查器。关于Flow更多的消息，�
 
 安装flow比较简单：你只需把`flow`的二进制文件的路径添加到系统环境变量即可。
 
-## 项目内安装flow
+### 局部安装flow
 
 安装Flow的推荐方式通过[`flow-bin`](https://www.npmjs.com/package/flow-bin) `npm` 包管理。添加`flow-bin`到项目的`package.json`文件。
 
