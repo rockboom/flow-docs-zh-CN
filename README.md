@@ -88,3 +88,49 @@ flow check
 
 Flow使用OCaml编写的(需要OCaml4.05.0或更高版本)。你可以按照[ocaml.org](https://ocaml.org/docs/install.html)的说明，在Mac OS X和Linux上安装OCaml。
 
+例如Ubuntu 16.04和相似的系统：
+
+```
+sudo apt-get install opam
+opam init --comp 4.05.0
+```
+
+OS X要使用 [brew package manager](http://brew.sh/)
+
+```
+brew install opam
+opam init --comp 4.05.0
+```
+然后重启shell并安装下面这些其他的库：
+
+```
+opam update
+opam pin add flowtype . -n
+opam install --deps-only flowtype
+```
+
+一旦你安装了这些依赖，运行下面的命令就可以构建Flow
+
+```
+make
+```
+
+运行上面的命令以后会生成一个包含`flow`二进制文件的`bin`文件夹。
+
+为了生成flow.js文件，首先要安装js_of_ocaml：
+
+```
+opam install -y js_of_ocaml
+```
+
+之后就可以轻松的生成flow.js文件：
+
+```
+make js
+```
+
+新的`flow.js`文件也将会在`bin`w文件夹下。
+
+*注意：OCaml依赖会阻止我们添加Flow到[npm](http://npmjs.org)。如果你需要一个npm二进制容器可以尝试[flow-bin](https://www.npmjs.org/package/flow-bin)。*
+
+Flow也能把它的解析器编译成JavaScript。[如何解析](https://github.com/facebook/flow/blob/master/src/parser/README.md)
