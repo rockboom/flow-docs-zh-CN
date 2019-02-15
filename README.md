@@ -134,3 +134,30 @@ make js
 *注意：OCaml依赖会阻止我们添加Flow到[npm](http://npmjs.org)。如果你需要一个npm二进制容器可以尝试[flow-bin](https://www.npmjs.org/package/flow-bin)。*
 
 Flow也能把它的解析器编译成JavaScript。[如何解析](https://github.com/facebook/flow/blob/master/src/parser/README.md)
+
+## Windows平台构建Flow
+
+在Windows平台上构建Flow有点儿复杂。下面的构建过程有一些简化，不过依然能够成功构建。
+
+通常的想法是在Cygwin中构建，目标是mingw。这样我们会得到一个即使在Cygwin外也能工作的二进制文件。
+
+### 安装Cygwin
+1. 从 https://cygwin.com/install.html 安装Cygwin 64位
+2. 在powershell运行 `iex ((new-object net.webclient).DownloadString("https://raw.githubusercontent.com/ocaml/ocaml-ci-scripts/master/appveyor-install.ps1"))`，这可能会运行一个带有一堆Cygwin安装包和其他东西的Cygwin安装程序。这样可以帮助确认opam需要的每一个安装包都是可用的。
+
+### 安装Opam
+1. 打开cygwin64终端
+2. 通过`curl -fsSL -o opam64.tar.xz https://github.com/fdopen/opam-repository-mingw/releases/download/0.0.0.1/opam64.tar.xz`下载opam
+3. `tar -xf opam64.tar.xz`
+4. `cd opam64`
+5. 安装opam `./install.sh`
+6. 初始化opam并指向一个mingw分支: `opam init -a default "https://github.com/fdopen/opam-repository-mingw.git" --comp "4.05.0+mingw64c" --switch "4.05.0+mingw64c"`
+7. 确保opam的相关东西已经添加到环境变量中: ```eval `opam config env` ```
+
+### 安装Flow
+1. 克隆flow项目:`git clone https://github.com/facebook/flow.git`
+2. `cd flow`
+3. 告诉opam使用这个目录作为flow类型的项目：`opam pin add flowtype . -n`
+4. 安装系统依赖：`opam depext -u flowtype`
+5. 安装Flow的依赖：`opam install flowtype --deps-only`
+6. 最后再构建Flow：`make all`
