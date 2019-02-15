@@ -58,3 +58,33 @@ opam install flowtype
 eval `opam config env`
 flow --help
 ```
+
+## 开始
+
+使用flow非常容易。
+
+- 在项目的根路径下运行下面的命令，初始化Flow
+```
+flow init
+```
+
+- 所有要进行类型检查的文件顶部都需要添加下面的程序语句
+``` javascript
+/* @flow */
+```
+或
+``` javascript
+// @flow
+```
+
+- 运行flow
+```
+flow check
+```
+
+ [flow.org](https://flow.org/)能找到更详细的文档和更多的示例。
+
+## 构建 Flow
+
+Flow使用OCaml编写的(需要OCaml4.05.0或更高版本)。你可以按照[ocaml.org](https://ocaml.org/docs/install.html)的说明，在Mac OS X和Linux上安装OCaml。
+
