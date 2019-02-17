@@ -161,3 +161,26 @@ Flow也能把它的解析器编译成JavaScript。[如何解析](https://github.
 4. 安装系统依赖：`opam depext -u flowtype`
 5. 安装Flow的依赖：`opam install flowtype --deps-only`
 6. 最后再构建Flow：`make all`
+
+## 使用JavaScript的Flow解析器
+
+虽然Flow是用OCaml编写的，但它的解析器可以作为一个发布到npm的用来编译成JavaScript的模块，命名为[flow-parser](https://www.npmjs.com/package/flow-parser)。**Flow的大多数后端使用者不需要直接使用这个解析器**（并且应从该安装[flow-bin](https://www.npmjs.org/package/flow-bin) ），但是使用解析Flow类型的JavaScript的JavaScript安装包可以用它来生成带有附加注释类型的Flow语法树。
+
+## 运行测试示例
+
+要想运行测试示例，首先要用`make`编译flow。然后运行`bash ./runtests.sh bin/flow`
+
+运行`make test`就可以编译并生成测试示例。
+
+要想运行测试示例的子集你可以给`runtest.sh`文件传递第二个参数。
+
+例如：`bash runtests.sh bin/flow class | grep -v 'SKIP'`
+
+## 加入Flow社区
+* 网站：[https://flow.org](https://flow.org/)
+* 异议（适用于贡献者）：https://discord.gg/8ezwRUK
+* irc: #flowtype on Freenode
+* Twitter: 订阅 [@flowtype](https://twitter.com/flowtype) 和 [#flowtype](https://twitter.com/hashtag/flowtype)追踪最新的Flow消息。
+
+## 证书
+Flow使用MIT许可([证书](http://github.com/facebook/flow/blob/master/LICENSE))。[网站](https://flow.org/)和[文档](https://flow.org/en/docs/)根据知识共享署名4.0许可证获得许可([website/LICENSE-DOCUMENTATION](https://github.com/facebook/flow/blob/master/website/LICENSE-DOCUMENTATION))
